@@ -1,0 +1,276 @@
+<html>
+
+<head>
+    <title>GAME</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://assets.materialup.com/uploads/d6522050-2ab3-4c75-945c-90fbb0ddd5ac/preview.jpg">
+    <style>
+        h1 {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-style: italic;
+            color: black;
+            background-color: orange;
+        }
+
+        body {
+            background-image: url("https://images6.alphacoders.com/121/1215704.jpg");
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-attachment: fixed;
+            background-size: cover;
+
+        }
+
+        h2#name {
+            color: lightcoral;
+
+
+            white-space: normal;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            transform: translateX(-50%, -50%);
+
+        }
+
+        .img {
+            top: 300px;
+            position: relative;
+        }
+
+        .imge {
+            width: 140px;
+            height: 140px;
+        }
+
+        .button {
+            position: absolute;
+
+            background-color: orange;
+            color: black;
+            border-radius: 10px;
+            margin-right: 50px;
+        }
+
+        .button2 {
+            position: absolute;
+
+            background-color: lightcoral;
+            color: black;
+            border-radius: 10px;
+            margin-left: 725px;
+            border-style: outset;
+            border-width: 1px;
+            border-color: red;
+        }
+
+        .button2:hover {
+            background-color: blueviolet;
+        }
+
+        .button2:active {
+            background-color: red;
+        }
+    </style>
+    <script>
+        var rlist = ["Lewis Hamilton", "Max Verstappen", "Lando Norris", "Yuki Tsunoda", "Pierre Gasly", "Fernando Alonso", "Alex Albon", "Kevin Magnussen", "George Russell", "Checo Perez", "Charles Leclerc", "Carlos Sainz", "Oscar Piastri", "Esteban Ocon", "Nico Hulkenberg", "Logan Seargant", "Nyck De Vres", "Guanyu Zhou", "Lance Stroll", "Valtteri Bottas"]
+        var count = 0;
+        var ret;
+        var started = 0;
+        var val;
+        var score = 0;
+        var str = "SCORE : "
+        var time = 0;
+        var start1 = 1;
+        function checks(ret) {
+            if (count > 18) {
+                str = "YOUR SCORE IS "
+                document.getElementById("score").innerText = str + score;
+                document.getElementById("score").style.color = "pink"
+                document.getElementById("name").innerText = " "
+                if (score == 19) {
+                    score = "20"
+                    var congr = " CONGRATULATIONS";
+                    document.getElementById("score").innerText = str + score + congr
+                }
+                return true;
+
+            }
+            if (ret == count && start1 == 2) {
+                correct()
+                score += 1
+                count += 1
+                document.getElementById("name").innerText = rlist[count]
+                document.getElementById("score").innerText = str + score + val
+                return true
+            }
+            else if (start1 == 2) {
+                incorrect()
+                count += 1
+                document.getElementById("name").innerText = rlist[count]
+                document.getElementById("score").innerText = str + score + val
+                return true
+            }
+            return false
+        }
+        function hint() {
+            if (count < 5) {
+                alert("Hint available after 5 attempts")
+                return false;
+            }
+            if (score == 0 && count == 5) {
+                alert("You're pretty bad at this aren't you? Well the next one is the guy to the right side of green suit.")
+                return true;
+            }
+            if (count < 10) {
+                alert("Charles Leclerc is the 3rd on from top left. Watch out for him.")
+                return true
+            }
+            if (count < 15) {
+                alert("The last guy is Logan Seargent")
+            }
+            else {
+                alert("No hints after 15 attempts ")
+                return false;
+            }
+        }
+        function correct() {
+            val = "   CORRECT"
+            document.getElementById("score").style.color = "green"
+        }
+        function incorrect() {
+            val = "   INCORRECT"
+            document.getElementById("score").style.color = "red"
+
+        }
+        function start() {
+            if (started == 1) {
+                return;
+            }
+            started = 1;
+            start1 = 2
+            const interval = setInterval(timer, 1000);
+
+
+            function timer() {
+                if (time > 59) {
+                    clearInterval(interval);
+                    return;
+                }
+                document.getElementById("t").innerHTML = "Time left :" + (59 - time);
+
+                time += 1;
+                if (time > 59) {
+                    count = 20;
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="navbar">
+        <center>
+            <h1>
+                Identify the Formula 1 Driver
+            </h1>
+        </center>
+        <input type="button" value="Start Game" class="button2" onclick="start()">
+        <br> <br>
+        <center>
+            <b id="t" style="color: blueviolet;">Time Left : 60</b>
+            <h2 id="name">
+
+                Lewis Hamilton
+            </h2>
+        </center>
+        <h2 id="score" style="color:green">SCORE : 0</h2>
+        <input type="button" value="Hint" onclick="hint()" class="button">
+
+
+        <br><br><br>
+
+    </div>
+
+    <div class="img">
+
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/2col/image.png"
+            alt="" id="c1" name="Max Verstappen" onclick="checks('1')">
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/S/SERPER01_Sergio_Perez/serper01.png.transform/2col/image.png"
+            alt="" id="c9" name="Checo Perez" onclick="checks('9')">
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/2col/image.png"
+            alt="" id="c10" name="Charles Leclerc" onclick="checks('10')">
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/2col/image.png"
+            alt="" id="c11" name="Carlos Sainz" onclick="checks('11')">
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/2col/image.png"
+            alt="" id="c8" name="George Russell" onclick="checks('8')">
+        <img class=imge
+            src="https://www.formula1.com/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/2col/image.png"
+            alt="" id="c0" name="Lewis Hamilton" onclick="checks('0')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/2col/image.png"
+            alt="" id="c13" name="Estban Ocon" onclick="checks('13')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/2col/image.png"
+            alt="" id="c4" name="Pierre Gasly" onclick="checks('4')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/2col/image.png"
+            alt="" id="c12" name="Oscar Piastri" onclick="checks('12')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/2col/image.png"
+            alt="" id="c2" name="Lando Norris" onclick="checks('2')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png.transform/2col/image.png"
+            alt="" id="c19" name="Valtteri Bottas" onclick="checks('19')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/G/GUAZHO01_Guanyu_Zhou/guazho01.png.transform/2col/image.png"
+            alt="" id="c17" name="Guanyu Zhou" onclick="checks('17')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/2col/image.png"
+            alt="" id="c18" name="Lance Stroll" onclick="checks('18')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/2col/image.png"
+            alt="" id="c5" name="Fernando Alonso" onclick="checks('5')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/K/KEVMAG01_Kevin_Magnussen/kevmag01.png.transform/2col/image.png"
+            alt="" id="c7" name="Kevin Magnussen" onclick="checks('7')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/2col/image.png"
+            alt="" id="c14" name="Nico Hulkenburg" onclick="checks('14')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/N/NYCDEV01_Nyck_De%20Vries/nycdev01.png.transform/2col/image.png"
+            alt="" id="c16" name="Nyck De Vries" onclick="checks('16')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/2col/image.png"
+            alt="" id="c3" name="Yuki Tsunoda" onclick="checks('3')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/2col/image.png"
+            alt="" id="c6" name="Alex Albon" onclick="checks('6')">
+        <img class=imge
+            src="
+        https://www.formula1.com/content/dam/fom-website/drivers/L/LOGSAR01_Logan_Sargeant/logsar01.png.transform/2col/image.png"
+            alt="" id="c15" name="Logan Seargent" onclick="checks('15')">
+    </div>
+</body>
+
+</html>
